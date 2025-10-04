@@ -1,16 +1,26 @@
 package com.enzo.rocketseat;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CurrentTimestamp;
 
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
-    private Date created_at;
 
-    public User(Long id, String name, String email, Date created_at) {
+    @CurrentTimestamp()
+    private LocalDateTime created_at;
+
+    protected User(){}
+
+    public User(Long id, String name, String email, LocalDateTime created_at) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -21,27 +31,15 @@ public class User {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
